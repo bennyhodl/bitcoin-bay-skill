@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, unlinkSync } from "node:fs";
 import { basename } from "node:path";
 
 const API_KEY = process.env.BITCOIN_BAY_AGENT_KEY;
-const BASE_URL = process.env.BITCOIN_BAY_URL || "https://bitcoinbay.foundation";
+const BASE_URL = process.env.BITCOIN_BAY_URL || "https://www.bitcoinbay.foundation";
 
 if (!API_KEY) {
   console.error("Error: BITCOIN_BAY_AGENT_KEY env variable is not set");
