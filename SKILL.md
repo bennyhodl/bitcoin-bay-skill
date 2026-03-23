@@ -13,17 +13,12 @@ All content you create is saved as **draft** and requires human approval before 
 
 ## CLI tool
 
-The CLI is installed via npm and runs with `npx`.
-
-```bash
-BB="npx @bennyhodl/bitcoin-bay-website"
-```
+The CLI is published on npm as `@bennyblader/bitcoin-bay-website` and runs directly via `npx -y` (the `-y` flag skips the install confirmation prompt).
 
 ### Prerequisites
 
 1. The `BITCOIN_BAY_AGENT_KEY` environment variable must be set. If it's missing, the CLI will tell you. `BITCOIN_BAY_URL` defaults to `https://bitcoinbay.foundation` — override it for local development.
-2. Install dependencies (only needed once): `npm install -g @bennyhodl/bitcoin-bay-website`
-   - This installs `sharp` for image optimization. Images are automatically resized (max 2400px), converted to WebP, and stripped of EXIF metadata before upload.
+2. `sharp` is bundled for image optimization. Images are automatically resized (max 2400px), converted to WebP, and stripped of EXIF metadata before upload.
 
 ## Commands
 
@@ -32,7 +27,7 @@ BB="npx @bennyhodl/bitcoin-bay-website"
 Use when you've written content, summarized research, or have news to share.
 
 ```bash
-$BB create:post \
+npx -y @bennyblader/bitcoin-bay-website create:post \
   --title "Your Post Title" \
   --body "Full markdown body of the post" \
   --excerpt "A short summary for previews" \
@@ -48,7 +43,7 @@ The body supports full markdown — headers, links, images, code blocks, lists, 
 Use when you've found a documentary, book, article, website, or podcast worth recommending.
 
 ```bash
-$BB create:resource \
+npx -y @bennyblader/bitcoin-bay-website create:resource \
   --title "The Bitcoin Standard" \
   --url "https://saifedean.com/thebitcoinstandard" \
   --category books \
@@ -66,7 +61,7 @@ Optional flags: `--image <url>`, `--featured`
 Use when scheduling a meetup, workshop, or community gathering.
 
 ```bash
-$BB create:event \
+npx -y @bennyblader/bitcoin-bay-website create:event \
   --title "Bitcoin Basics Workshop" \
   --start_at "2026-04-15T18:00:00-04:00" \
   --end_at "2026-04-15T20:00:00-04:00" \
@@ -86,7 +81,7 @@ Dates must be ISO 8601 format. Include timezone offset (Tampa Bay is ET: `-04:00
 Use when you need to attach an image to a post, event, or resource. **If you have a local image file, always use this command** — it optimizes images automatically (resizes to max 2400px, converts to WebP, strips EXIF) before uploading.
 
 ```bash
-$BB upload:media \
+npx -y @bennyblader/bitcoin-bay-website upload:media \
   --file /path/to/image.jpg \
   --folder events \
   --alt "Description of the image"
@@ -99,7 +94,7 @@ Images are automatically optimized with sharp before upload — a 26MB photo wil
 ### Add a newsletter subscriber
 
 ```bash
-$BB add:subscriber \
+npx -y @bennyblader/bitcoin-bay-website add:subscriber \
   --email "satoshi@example.com" \
   --name "Satoshi Nakamoto"
 ```
@@ -107,37 +102,37 @@ $BB add:subscriber \
 ### List resources
 
 ```bash
-$BB list:resources [--status draft|published] [--category <c>] [--featured] [--since <iso>] [--until <iso>] [--limit <n>]
+npx -y @bennyblader/bitcoin-bay-website list:resources [--status draft|published] [--category <c>] [--featured] [--since <iso>] [--until <iso>] [--limit <n>]
 ```
 
 ### List blog posts
 
 ```bash
-$BB list:posts [--status draft|published] [--featured] [--since <iso>] [--until <iso>] [--limit <n>]
+npx -y @bennyblader/bitcoin-bay-website list:posts [--status draft|published] [--featured] [--since <iso>] [--until <iso>] [--limit <n>]
 ```
 
 ### List events
 
 ```bash
-$BB list:events [--status draft|published] [--upcoming] [--since <iso>] [--until <iso>] [--limit <n>]
+npx -y @bennyblader/bitcoin-bay-website list:events [--status draft|published] [--upcoming] [--since <iso>] [--until <iso>] [--limit <n>]
 ```
 
 ### Update a resource
 
 ```bash
-$BB update:resource --id <id> [--title <t>] [--url <u>] [--category <c>] [--description <d>] [--author <a>] [--image <url>] [--featured] [--status draft|published] [--tags <comma-separated>]
+npx -y @bennyblader/bitcoin-bay-website update:resource --id <id> [--title <t>] [--url <u>] [--category <c>] [--description <d>] [--author <a>] [--image <url>] [--featured] [--status draft|published] [--tags <comma-separated>]
 ```
 
 ### Update a blog post
 
 ```bash
-$BB update:post --id <id> [--title <t>] [--body <b>] [--excerpt <e>] [--featured_image <url>] [--featured] [--status draft|published] [--published_at <iso>] [--tags <comma-separated>]
+npx -y @bennyblader/bitcoin-bay-website update:post --id <id> [--title <t>] [--body <b>] [--excerpt <e>] [--featured_image <url>] [--featured] [--status draft|published] [--published_at <iso>] [--tags <comma-separated>]
 ```
 
 ### Update an event
 
 ```bash
-$BB update:event --id <id> [--title <t>] [--description <d>] [--hosts <h>] [--start_at <iso>] [--end_at <iso>] [--venue_name <v>] [--venue_address <a>] [--image <url>] [--is_free <bool>] [--price <p>] [--status draft|published]
+npx -y @bennyblader/bitcoin-bay-website update:event --id <id> [--title <t>] [--description <d>] [--hosts <h>] [--start_at <iso>] [--end_at <iso>] [--venue_name <v>] [--venue_address <a>] [--image <url>] [--is_free <bool>] [--price <p>] [--status draft|published]
 ```
 
 ## Content guidelines
@@ -155,14 +150,12 @@ Bitcoin Bay Foundation is a 501(c)(3) nonprofit focused on Bitcoin education in 
 After finishing a research task where you found valuable Bitcoin educational content:
 
 ```bash
-BB="npx @bennyhodl/bitcoin-bay-website"
-
 # Upload a cover image if you have one
-$BB upload:media --file ./cover.png --folder resources --alt "Book cover"
+npx -y @bennyblader/bitcoin-bay-website upload:media --file ./cover.png --folder resources --alt "Book cover"
 # → Media uploaded: https://blob.vercel-storage.com/media/resources/1234-cover.png
 
 # Create the resource
-$BB create:resource \
+npx -y @bennyblader/bitcoin-bay-website create:resource \
   --title "Mastering the Lightning Network" \
   --url "https://github.com/lnbook/lnbook" \
   --category books \
